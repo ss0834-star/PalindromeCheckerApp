@@ -1,24 +1,46 @@
-import java.util.Scanner;
+public class PalindromeCheckerApp {
+    static boolean palindrome(String word) {
+        String revword = "";
+        for (int i = word.length() - 1; i >= 0; i--) {
+            revword += word.charAt(i);
+        }
+        if (word.equals(revword)) {
 
-class PalindromeChecker {
-    public static boolean isPalindrome(String input) {
-        input = input.replaceAll("\\s+", "").toLowerCase();
-        int length = input.length();
+            return true;
 
-        for (int i = 0; i < length / 2; i++) {
-            if (input.charAt(i) != input.charAt(length - 1 - i)) {
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    static boolean palindromearr(String word) {
+        int start = 0;
+        int end = word.length() - 1;
+        while (end >= start) {
+            if (word.charAt(start) != word.charAt(end)) {
                 return false;
             }
+            start++;
+            end--;
         }
         return true;
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string: ");
-        String input = scanner.nextLine();
+        float version = 2.0F;
+        System.out.println("Welcome to the Palindrome checker");
+        System.out.println("version : " + version);
+        System.out.println("System initialised successfully");
+        boolean status = palindromearr("madam");
+        if (status) {
+            System.out.println("palindrome word");
 
-        System.out.println(input + " -> " + isPalindrome(input));
-        scanner.close();
+        } else {
+            System.out.println("not a palindrome");
+        }
     }
 }
