@@ -1,8 +1,4 @@
-import java.util.Stack;
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.Deque;
-import java.util.ArrayDeque;
+import java.util.*;
 
 public class PalindromeCheckerApp {
 
@@ -112,16 +108,21 @@ public class PalindromeCheckerApp {
             return false;
         }
 
-        return PalindromeRecur(word, start+1, end-1);  // ✅ FIXED
+        return PalindromeRecur(word, start+1, end-1);
     }
+
+
 
     public static void main(String[] args){
 
         double version = 2.0;
-        System.out.println("Welcome to the Palindrome Checker Management System   ");
+        System.out.println("Welcome to the Palindrome Checker Management System ");
         System.out.println("Version : " + version);
         System.out.println("System initialized successfully.");
-        String word = "mada";
+        String word = "m a d a M";
+        word = word.toLowerCase();
+        word = word.replace(" ", "");
+
         boolean status = PalindromeRecur(word, 0, word.length() - 1 );
         if (status){
             System.out.println("Palindrome");
