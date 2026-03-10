@@ -68,9 +68,7 @@ public class PalindromeCheckerApp {
 
         if (word.equals(rev_word)){
             return true;
-        }
-
-        else{
+        } else{
             return false;
         }
     }
@@ -105,23 +103,6 @@ public class PalindromeCheckerApp {
         return true;
     }
 
-    static boolean palindromeQueueStack(String word){
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
-
-        for (int i=0; i < word.length(); i++){
-            stack.push(word.charAt(i));
-            queue.add(word.charAt(i));
-        }
-
-        for (int i=0; i < word.length(); i++){
-            if(queue.remove() != stack.pop()){
-                return false;
-            }
-        }
-        return true;
-    }
-
     static boolean palindromeDeque(String word){
         Deque<Character> deque = new ArrayDeque<>();
         for(int i = 0; i < word.length(); i++){
@@ -130,20 +111,6 @@ public class PalindromeCheckerApp {
 
         while(deque.size() > 1){
             if(deque.removeFirst() != deque.removeLast()){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    static boolean palindromeLinkedList(String word){
-        LinkedList<Character> linkedList = new LinkedList<>();
-        for(int i = 0; i < word.length(); i++){
-            linkedList.add(word.charAt(i));
-        }
-
-        while(linkedList.size() > 1){
-            if(linkedList.removeFirst() != linkedList.removeLast()){
                 return false;
             }
         }
@@ -178,8 +145,7 @@ public class PalindromeCheckerApp {
 
         if (status){
             System.out.println("Palindrome");
-        }
-        else{
+        } else{
             System.out.println("not");
         }
 
@@ -188,8 +154,7 @@ public class PalindromeCheckerApp {
 
         if(result){
             System.out.println("UC11 Result: Palindrome");
-        }
-        else{
+        } else{
             System.out.println("UC11 Result: Not Palindrome");
         }
 
@@ -198,9 +163,29 @@ public class PalindromeCheckerApp {
 
         if(strategyResult){
             System.out.println("UC12 Strategy Result: Palindrome");
-        }
-        else{
+        } else{
             System.out.println("UC12 Strategy Result: Not Palindrome");
         }
+
+        long startTime, endTime;
+
+        startTime = System.nanoTime();
+        boolean arrResult = palindromeArr(word);
+        endTime = System.nanoTime();
+        long arrayTime = endTime - startTime;
+
+        startTime = System.nanoTime();
+        boolean stackResult = palindromeStack(word);
+        endTime = System.nanoTime();
+        long stackTime = endTime - startTime;
+
+        startTime = System.nanoTime();
+        boolean dequeResult = palindromeDeque(word);
+        endTime = System.nanoTime();
+        long dequeTime = endTime - startTime;
+
+        System.out.println("Array Method: " + arrResult + " | Time: " + arrayTime + " ns");
+        System.out.println("Stack Method: " + stackResult + " | Time: " + stackTime + " ns");
+        System.out.println("Deque Method: " + dequeResult + " | Time: " + dequeTime + " ns");
     }
 }
