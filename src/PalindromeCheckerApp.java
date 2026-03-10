@@ -1,5 +1,22 @@
 import java.util.*;
 
+class PalindromeChecker {
+
+    public boolean checkPalindrome(String word){
+        int start = 0;
+        int end = word.length() - 1;
+
+        while(start < end){
+            if(word.charAt(start) != word.charAt(end)){
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
 
     static boolean palindrome(String word){
@@ -39,7 +56,6 @@ public class PalindromeCheckerApp {
         for (int i = 0; i < word.length(); i++) {
             stack.push(word.charAt(i));
         }
-
 
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != stack.pop()) {
@@ -111,27 +127,34 @@ public class PalindromeCheckerApp {
         return PalindromeRecur(word, start+1, end-1);
     }
 
-
-
     public static void main(String[] args){
 
         double version = 2.0;
         System.out.println("Welcome to the Palindrome Checker Management System ");
         System.out.println("Version : " + version);
         System.out.println("System initialized successfully.");
+
         String word = "m a d a M";
         word = word.toLowerCase();
         word = word.replace(" ", "");
 
         boolean status = PalindromeRecur(word, 0, word.length() - 1 );
+
         if (status){
             System.out.println("Palindrome");
-
         }
         else{
             System.out.println("not");
+        }
 
+        PalindromeChecker checker = new PalindromeChecker();
+        boolean result = checker.checkPalindrome(word);
+
+        if(result){
+            System.out.println("UC11 Result: Palindrome");
+        }
+        else{
+            System.out.println("UC11 Result: Not Palindrome");
         }
     }
-
 }
