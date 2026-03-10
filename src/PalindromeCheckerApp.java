@@ -1,5 +1,45 @@
 import java.util.*;
 
+interface PalindromeStrategy{
+    boolean check(String word);
+}
+
+class StackStrategy implements PalindromeStrategy{
+
+    public boolean check(String word){
+        Stack<Character> stack = new Stack<>();
+
+        for(int i = 0; i < word.length(); i++){
+            stack.push(word.charAt(i));
+        }
+
+        for(int i = 0; i < word.length(); i++){
+            if(word.charAt(i) != stack.pop()){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class DequeStrategy implements PalindromeStrategy{
+
+    public boolean check(String word){
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for(int i = 0; i < word.length(); i++){
+            deque.addLast(word.charAt(i));
+        }
+
+        while(deque.size() > 1){
+            if(deque.removeFirst() != deque.removeLast()){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
 class PalindromeChecker {
 
     public boolean checkPalindrome(String word){
@@ -66,7 +106,6 @@ public class PalindromeCheckerApp {
     }
 
     static boolean palindromeQueueStack(String word){
-        System.out.println("QueueStack");
         Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
@@ -84,7 +123,6 @@ public class PalindromeCheckerApp {
     }
 
     static boolean palindromeDeque(String word){
-        System.out.println("deque");
         Deque<Character> deque = new ArrayDeque<>();
         for(int i = 0; i < word.length(); i++){
             deque.addLast(word.charAt(i));
@@ -99,7 +137,6 @@ public class PalindromeCheckerApp {
     }
 
     static boolean palindromeLinkedList(String word){
-        System.out.println("LinkedList");
         LinkedList<Character> linkedList = new LinkedList<>();
         for(int i = 0; i < word.length(); i++){
             linkedList.add(word.charAt(i));
@@ -114,7 +151,6 @@ public class PalindromeCheckerApp {
     }
 
     static boolean PalindromeRecur(String word, int start, int end ){
-        System.out.println("recur");
 
         if (start >= end){
             return true;
@@ -129,7 +165,7 @@ public class PalindromeCheckerApp {
 
     public static void main(String[] args){
 
-        double version = 2.0;
+        double version = 3.0;
         System.out.println("Welcome to the Palindrome Checker Management System ");
         System.out.println("Version : " + version);
         System.out.println("System initialized successfully.");
@@ -155,6 +191,16 @@ public class PalindromeCheckerApp {
         }
         else{
             System.out.println("UC11 Result: Not Palindrome");
+        }
+
+        PalindromeStrategy strategy = new StackStrategy();
+        boolean strategyResult = strategy.check(word);
+
+        if(strategyResult){
+            System.out.println("UC12 Strategy Result: Palindrome");
+        }
+        else{
+            System.out.println("UC12 Strategy Result: Not Palindrome");
         }
     }
 }
